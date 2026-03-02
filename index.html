@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gửi Em Ngày 8/3</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="loading-bar"></div>
+
+    <!-- Fake login cinematic intro -->
+    <div id="login-intro" class="login-intro" aria-hidden="false">
+      <div class="login-card">
+        <div class="login-avatar">♥</div>
+        <h2 class="login-title">Private Access</h2>
+
+        <div class="login-field">
+          <label>Username</label>
+          <div class="login-input-wrap">
+            <span id="login-username-typed" class="login-typed"></span>
+            <span class="login-caret"></span>
+          </div>
+        </div>
+
+        <div class="login-field">
+          <label>Password</label>
+          <div class="login-input-wrap">
+            <span id="login-password-typed" class="login-typed"></span>
+            <span class="login-caret"></span>
+          </div>
+        </div>
+
+        <button id="login-intro-btn" class="btn primary" disabled>
+          Login
+        </button>
+        <p id="login-status" class="login-status">
+          Đang xác thực tình yêu…
+        </p>
+      </div>
+    </div>
+
+    <!-- Login loading cinematic -->
+    <div id="login-loading" class="login-loading" aria-hidden="true">
+      <div class="login-loading-inner">
+        <div class="login-loading-heart"></div>
+        <div class="login-loading-bar">
+          <div class="login-loading-bar-fill"></div>
+        </div>
+        <p id="login-loading-text" class="login-loading-text">
+          Đang mở khóa điều đặc biệt…
+        </p>
+      </div>
+    </div>
+
+    <!-- Intro overlay mượt trước khi hiển thị nội dung chính -->
+    <div id="intro-overlay" class="intro-overlay" aria-hidden="false">
+      <div class="intro-inner">
+        <button id="intro-skip" class="intro-skip" aria-label="Bỏ qua phần mở đầu">
+          Skip Intro
+        </button>
+        <div id="intro-sequence" class="intro-sequence" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div id="cursor-heart" aria-hidden="true"></div>
+    <div class="light-particles" aria-hidden="true"></div>
+
+    <div class="heart-background" aria-hidden="true"></div>
+
+    <audio id="bg-music" loop>
+      <!-- Thay file nhạc riêng của em ở đây -->
+      <source src="assets/music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Navbar glassmorphism cố định -->
+    <header class="main-nav" id="top-nav">
+      <div class="container main-nav-inner">
+        <div class="main-nav-logo">Gửi Em 8/3</div>
+        <button
+          id="nav-toggle"
+          class="nav-toggle"
+          aria-label="Mở điều hướng"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+        >
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        <nav
+          id="primary-nav"
+          class="main-nav-links"
+          aria-label="Điều hướng chính"
+        >
+          <a href="#home" data-nav-target="home">Trang chủ</a>
+          <a href="#message" data-nav-target="message">Lời nhắn</a>
+          <a href="#memories" data-nav-target="memories">Kỷ niệm</a>
+          <a href="#reasons" data-nav-target="reasons">Lý do yêu</a>
+          <a href="#timeline" data-nav-target="timeline">Timeline</a>
+          <a href="#wishlist" data-nav-target="wishlist">Wishlist</a>
+        </nav>
+      </div>
+    </header>
+
+    <header class="hero hero-cinematic reveal" id="home">
+      <div class="hero-content container">
+        <div class="hero-text">
+          <p class="hero-label">Happy Women's Day 8/3</p>
+          <h1>Gửi em, cô gái anh thương...</h1>
+          <p class="hero-quote">
+            Ngày 8/3 này là của em, nhưng anh mong mỗi ngày sau này em đều thấy
+            mình được yêu thương như vậy.
+          </p>
+          <p class="hero-subtitle">
+            Một góc nhỏ anh tạo riêng cho em – để kể lại hành trình chúng ta đã
+            đi cùng nhau, và để nói những điều anh vẫn luôn giữ trong tim.
+          </p>
+
+          <div class="hero-actions">
+            <button id="music-toggle" class="btn primary music-toggle-btn">
+              Bật nhạc nền
+            </button>
+            <button id="surprise-btn" class="btn outline">
+              Điều bất ngờ cho em
+            </button>
+            <button id="theme-toggle" class="btn outline">
+              Chế độ tối
+            </button>
+            <button id="share-btn" class="btn outline">
+              Chia sẻ trang này
+            </button>
+          </div>
+
+          <div class="love-timer-card">
+            <p class="timer-label">Thời gian chúng ta bên nhau</p>
+            <p id="love-duration" class="timer-value">Đang tính...</p>
+            <p class="timer-start">
+              Bắt đầu từ: <span id="love-start-date">08/03/2022</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-photo">
+          <div class="photo-frame">
+            <img
+              src="assets/cover.jpg"
+              alt="Khoảnh khắc đẹp của chúng ta"
+              loading="lazy"
+            />
+          </div>
+          <p class="photo-caption">
+            Dù mai này có đi đến đâu, anh vẫn muốn là người nắm tay em qua mọi
+            mùa.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section message-section reveal" id="message">
+        <div class="container">
+          <div class="section-header">
+            <h2>Lời anh muốn nói với em</h2>
+            <p>Đọc từ từ thôi, vì từng chữ đều là thật lòng.</p>
+          </div>
+
+          <div class="message-card">
+            <div id="typing-message" class="typing-message"></div>
+            <div class="message-meta">
+              <span>Viết riêng cho em,</span>
+              <span>vào một đêm anh nhớ em nhiều hơn mọi ngày.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section memories-section reveal" id="memories">
+        <div class="container">
+          <div class="section-header">
+            <h2>Những khoảnh khắc của chúng ta</h2>
+            <p>
+              Một vài tấm hình nhỏ, nhưng với anh là cả một khoảng trời kỷ niệm.
+            </p>
+          </div>
+
+          <div class="gallery-grid">
+            <div class="gallery-item" data-caption="Nụ cười đầu tiên làm anh thấy cả ngày bỗng đẹp hơn.">
+              <img src="assets/memory1.jpg" alt="Kỷ niệm 1" loading="lazy" />
+            </div>
+            <div class="gallery-item" data-caption="Khoảnh khắc bình yên bên em, mọi ồn ào ngoài kia đều tan biến.">
+              <img src="assets/memory2.jpg" alt="Kỷ niệm 2" loading="lazy" />
+            </div>
+            <div class="gallery-item" data-caption="Một buổi hẹn hò giản dị nhưng anh vẫn nhớ rất lâu.">
+              <img src="assets/memory3.jpg" alt="Kỷ niệm 3" loading="lazy" />
+            </div>
+            <div class="gallery-item" data-caption="Cái nắm tay ấy làm anh tin rằng mình thật may mắn.">
+              <img src="assets/memory4.jpg" alt="Kỷ niệm 4" loading="lazy" />
+            </div>
+            <div class="gallery-item" data-caption="Em là “nhà” của anh, dù ta ở bất cứ đâu.">
+              <img src="assets/memory5.jpg" alt="Kỷ niệm 5" loading="lazy" />
+            </div>
+            <div class="gallery-item" data-caption="Cảm ơn em vì đã đến và ở lại trong cuộc đời anh.">
+              <img src="assets/memory6.jpg" alt="Kỷ niệm 6" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reasons-section section reveal" id="reasons">
+        <div class="container">
+          <div class="section-header">
+            <h2>Lý do anh yêu em</h2>
+            <p>
+              Không phải vì một điều gì quá lớn lao, mà là vì từng điều nhỏ bé
+              em mang đến mỗi ngày.
+            </p>
+          </div>
+
+          <div class="reasons-grid">
+            <div class="reason-card">
+              <div class="reason-card-inner">
+                <div class="reason-card-face reason-card-front">
+                  <span class="reason-label">01</span>
+                  <h3>Nụ cười của em</h3>
+                  <p>
+                    Mỗi lần em cười, mọi mệt mỏi của anh đều như tan biến. Anh
+                    chỉ muốn làm thêm nhiều điều để thấy em cười thật nhiều.
+                  </p>
+                </div>
+                <div class="reason-card-face reason-card-back">
+                  <p>
+                    Có những ngày anh chẳng vui, chỉ cần một tin nhắn hay một
+                    bức ảnh em gửi cũng đủ kéo tâm trạng anh về lại bình yên.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="reason-card">
+              <div class="reason-card-inner">
+                <div class="reason-card-face reason-card-front">
+                  <span class="reason-label">02</span>
+                  <h3>Sự dịu dàng của em</h3>
+                  <p>
+                    Em nhẹ nhàng nhưng không yếu đuối, em mạnh mẽ nhưng không
+                    hề lạnh lùng. Sự cân bằng ấy làm anh nể, và càng thương em
+                    hơn.
+                  </p>
+                </div>
+                <div class="reason-card-face reason-card-back">
+                  <p>
+                    Dù anh có hơi trẻ con, có đôi lúc im lặng, em vẫn chọn lắng
+                    nghe và ở lại bên anh – anh trân trọng điều đó vô cùng.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="reason-card">
+              <div class="reason-card-inner">
+                <div class="reason-card-face reason-card-front">
+                  <span class="reason-label">03</span>
+                  <h3>Cách em yêu thương</h3>
+                  <p>
+                    Em không nói quá nhiều, nhưng từng hành động nhỏ đều cho anh
+                    thấy: anh quan trọng với em đến nhường nào.
+                  </p>
+                </div>
+                <div class="reason-card-face reason-card-back">
+                  <p>
+                    Anh biết mình không hoàn hảo, nhưng từ ngày có em, anh luôn
+                    muốn trở thành một phiên bản tốt hơn – để xứng đáng với tình
+                    yêu em dành cho anh.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section timeline-section reveal" id="timeline">
+        <div class="container">
+          <div class="section-header">
+            <h2>Những cột mốc của chúng ta</h2>
+            <p>
+              Một vài ngày tháng nhỏ thôi, nhưng mỗi lần nhớ lại đều khiến anh
+              mỉm cười.
+            </p>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Ngày đầu tiên mình nói chuyện</span>
+                <p>
+                  Anh không ngờ rằng từ một cuộc trò chuyện tưởng như bình
+                  thường, lại mở ra cả một hành trình dài mình đi cùng nhau.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Buổi hẹn hò đầu tiên</span>
+                <p>
+                  Hôm đó anh hơi hồi hộp, còn em thì cười bảo anh ngố. Nhưng
+                  chính sự vụng về ấy lại khiến anh nhớ mãi.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Ngày mình chính thức bên nhau</span>
+                <p>
+                  Từ hôm ấy, mọi dự định tương lai của anh đều vô thức có hình
+                  bóng em trong đó.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Những lần mình vượt qua giận dỗi</span>
+                <p>
+                  Không phải lúc nào cũng êm đềm, nhưng sau mỗi lần hiểu nhau
+                  hơn, anh lại càng tin rằng: mình sinh ra là để đi cùng nhau
+                  lâu dài.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section letter-section reveal">
+        <div class="container">
+          <div class="letter-card">
+            <h2>Gửi em, một nửa dịu dàng của anh</h2>
+            <p>
+              Có lẽ anh không phải là người giỏi nói lời ngọt ngào, nhưng bằng
+              cách nào đó, mỗi lần nhìn em cười, anh lại thấy mình muốn cố gắng
+              hơn một chút, dịu dàng hơn một chút, và yêu em nhiều hơn một
+              chút nữa.
+            </p>
+            <p>
+              Cảm ơn em vì đã xuất hiện trong cuộc đời anh – nhẹ nhàng, nhưng đủ
+              để làm mọi thứ trở nên khác đi. Em là tin nhắn anh luôn chờ, là
+              giọng nói anh luôn muốn nghe, là cái ôm anh luôn muốn quay về tìm
+              mỗi khi mệt mỏi.
+            </p>
+            <p>
+              Đôi khi anh vụng về, đôi khi anh im lặng, đôi khi anh không biết
+              phải dỗ em thế nào cho đúng… nhưng có một điều anh luôn chắc chắn:
+              anh chưa bao giờ hết thương em. Và mỗi ngày trôi qua, anh lại thấy
+              mình muốn bảo vệ em nhiều hơn, muốn ở cạnh em lâu hơn, muốn cùng
+              em đi qua thật nhiều mùa 8/3 nữa.
+            </p>
+            <p>
+              Mong rằng khi em mở trang này, em sẽ cảm nhận được một điều – đó
+              là: dù cả thế giới có bận rộn đến đâu, thì ở đâu đó vẫn luôn có
+              một người nghĩ về em, thương em, và chọn em… là duy nhất.
+            </p>
+            <div class="letter-sign">
+              <span>Thương em nhiều,</span>
+              <span>Anh.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wishlist lãng mạn -->
+      <section class="section wishlist-section reveal" id="wishlist">
+        <div class="container">
+          <div class="section-header">
+            <h2>Wishlist của em</h2>
+            <p>
+              Nếu một ngày em muốn “đòi quà”, hãy bắt đầu từ đây – anh sẽ cố
+              gắng thực hiện từng điều một.
+            </p>
+          </div>
+
+          <div class="wishlist-controls">
+            <div class="wishlist-filters">
+              <button
+                class="wishlist-filter-btn active"
+                data-filter="all"
+              >
+                Tất cả
+              </button>
+              <button class="wishlist-filter-btn" data-filter="experience">
+                Trải nghiệm
+              </button>
+              <button class="wishlist-filter-btn" data-filter="gift">
+                Quà vật chất
+              </button>
+              <button class="wishlist-filter-btn" data-filter="surprise">
+                Bất ngờ
+              </button>
+            </div>
+
+            <div class="wishlist-sort">
+              <label for="wishlist-sort-select">Sắp xếp:</label>
+              <select id="wishlist-sort-select">
+                <option value="romance-desc">
+                  Mức độ lãng mạn (cao → thấp)
+                </option>
+                <option value="romance-asc">
+                  Mức độ lãng mạn (thấp → cao)
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div id="wishlist-grid" class="wishlist-grid"></div>
+
+          <div class="wishlist-admin">
+            <button id="wishlist-admin-toggle" class="btn outline">
+              Chế độ chỉnh sửa cho anh
+            </button>
+
+            <form id="wishlist-admin-form" class="wishlist-admin-form" hidden>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="admin-title">Tên quà</label>
+                  <input
+                    type="text"
+                    id="admin-title"
+                    placeholder="VD: Một chuyến đi biển cùng em"
+                    required
+                  />
+                </div>
+                <div class="form-field">
+                  <label for="admin-category">Phân loại</label>
+                  <select id="admin-category" required>
+                    <option value="experience">Trải nghiệm</option>
+                    <option value="gift">Quà vật chất</option>
+                    <option value="surprise">Bất ngờ</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="admin-description">Mô tả ngắn</label>
+                  <input
+                    type="text"
+                    id="admin-description"
+                    placeholder="Một dòng dễ thương để em đọc"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="admin-price">Giá (vui)</label>
+                  <input
+                    type="text"
+                    id="admin-price"
+                    placeholder="VD: 3 cái ôm thiệt chặt"
+                    required
+                  />
+                </div>
+                <div class="form-field">
+                  <label for="admin-romance">Mức độ lãng mạn (1–5)</label>
+                  <input
+                    type="number"
+                    id="admin-romance"
+                    min="1"
+                    max="5"
+                    value="4"
+                    required
+                  />
+                </div>
+                <div class="form-field">
+                  <label for="admin-image">Ảnh (tùy chọn)</label>
+                  <input
+                    type="text"
+                    id="admin-image"
+                    placeholder="Đường dẫn ảnh nếu có"
+                  />
+                </div>
+              </div>
+
+              <button type="submit" class="btn primary">
+                Thêm vào danh sách
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Secret message section -->
+      <section class="section secret-section reveal" id="secret">
+        <div class="container">
+          <button id="secret-btn" class="btn outline">
+            Nếu em tò mò…
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating back to top -->
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      aria-label="Về đầu trang"
+    >
+      ⬆
+    </button>
+
+    <!-- Floating cart -->
+    <button id="wishlist-cart-toggle" class="wishlist-cart-toggle" aria-label="Mở giỏ quà">
+      <span class="wishlist-cart-icon">🛒</span>
+      <span id="wishlist-cart-count" class="wishlist-cart-count">0</span>
+    </button>
+
+    <!-- Cart overlay -->
+    <div id="wishlist-cart-overlay" class="wishlist-cart-overlay" aria-hidden="true">
+      <div class="wishlist-cart-backdrop"></div>
+      <aside class="wishlist-cart-panel">
+        <div class="wishlist-cart-header">
+          <h3>Giỏ quà của em</h3>
+          <button
+            id="wishlist-cart-close"
+            class="wishlist-cart-close"
+            aria-label="Đóng giỏ quà"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div id="wishlist-cart-items" class="wishlist-cart-items">
+          <p class="wishlist-cart-empty">
+            Hiện chưa có món nào. Em chọn vài điều nhỏ xinh ở bên ngoài nhé.
+          </p>
+        </div>
+
+        <div class="wishlist-cart-footer">
+          <p>
+            Tổng số món quà:
+            <span id="wishlist-cart-total" class="wishlist-cart-total">0</span>
+          </p>
+          <button id="wishlist-send-btn" class="btn primary">
+            Gửi yêu cầu cho anh
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Modal xác nhận wishlist -->
+    <div id="wishlist-confirm-modal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button
+          id="wishlist-confirm-close"
+          class="modal-close"
+          aria-label="Đóng thông báo"
+        >
+          &times;
+        </button>
+        <h2>Yêu cầu của em đã được gửi 💌</h2>
+        <p>
+          Anh đã nhận được “wishlist” của em rồi. Anh sẽ từ từ hoàn thành từng
+          điều một – không hứa nhanh, nhưng hứa là sẽ luôn cố gắng vì em.
+        </p>
+      </div>
+    </div>
+
+    <div id="gallery-modal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Đóng ảnh">&times;</button>
+        <img id="modal-image" src="" alt="Kỷ niệm phóng to" />
+        <p id="modal-caption"></p>
+      </div>
+    </div>
+
+    <!-- Secret message modal -->
+    <div id="secret-modal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button
+          id="secret-close"
+          class="modal-close"
+          aria-label="Đóng lời nhắn bí mật"
+        >
+          &times;
+        </button>
+        <div id="secret-typing" class="typing-message"></div>
+      </div>
+    </div>
+
+    <div id="fireworks-canvas-wrapper">
+      <canvas id="fireworks-canvas"></canvas>
+      <div class="fireworks-message">
+        <button
+          id="fireworks-close"
+          class="fireworks-close"
+          aria-label="Đóng pháo hoa"
+        >
+          &times;
+        </button>
+        <h2>Chúc em 8/3 thật dịu dàng và hạnh phúc 🌸</h2>
+        <p>
+          Chúc em luôn được bình yên, luôn được yêu thương, và nếu có thể…
+          hãy để anh là người làm điều đó cho em lâu thật lâu.
+        </p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>
+          Trang nhỏ này được anh làm riêng cho em – không hoàn hảo, nhưng là
+          tất cả chân thành anh có.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
