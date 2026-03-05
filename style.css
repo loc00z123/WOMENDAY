@@ -404,6 +404,8 @@ button {
   cursor: pointer;
   transform-origin: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  aspect-ratio: 16 / 9;
+  height: auto;
 }
 
 .gallery-item::after {
@@ -427,6 +429,126 @@ button {
   height: 100%;
   object-fit: cover;
   filter: saturate(1.2);
+}
+
+/* Make hero photo landscape and limit its height */
+.photo-frame {
+  aspect-ratio: 4 / 3;
+  max-height: 450px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Wishlist card images should be landscape too */
+.wishlist-image-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.wishlist-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Modal image sizing to avoid extreme tall images */
+#modal-image {
+  max-height: 70vh;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Modal: hidden by default, show when .active */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Larger landscape gallery modal content */
+#gallery-modal .modal-content {
+  width: min(980px, 94vw);
+  max-width: 1100px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  border-radius: 1.1rem;
+  background: rgba(255,255,255,1);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* backdrop for modals */
+.modal .modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 4, 10, 0.48);
+  backdrop-filter: blur(6px);
+  z-index: 1;
+}
+
+/* ensure modal content sits above backdrop and clips children */
+#gallery-modal .modal-content,
+.modal .modal-content {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* position close button absolutely so it doesn't affect image layout */
+#gallery-modal .modal-content .modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/* Force modal image to always be landscape and fill modal width */
+#modal-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 72vh;
+  object-fit: cover;
+  border-radius: 0.9rem;
+  display: block;
+}
+
+#modal-caption {
+  margin: 0;
+  padding: 0 0.6rem;
+  text-align: center;
+  color: #6b4d60;
+  max-width: 920px;
 }
 
 .gallery-item:hover {

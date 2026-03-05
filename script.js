@@ -11,15 +11,16 @@ const LOVE_START_DATE_STRING = "2025-06-30"; // Ví dụ: 8/3/2022
 
 // Nội dung lời nhắn có hiệu ứng typing
 const TYPING_MESSAGE = `
-Em à,
+Bé ơi,
 
-Nếu có một từ để nói về điều anh cảm nhận khi ở cạnh em, có lẽ đó là: "biết ơn".
+Nếu có một từ để nói về điều tui cảm nhận khi ở cạnh bé, có lẽ đó là: sự biết ơn của tui ó
 
-Biết ơn vì giữa vô số người ngoài kia, anh lại có duyên gặp được em.
-Biết ơn vì em đã chọn ở lại, dù có những lúc anh chưa đủ khéo léo, chưa đủ trưởng thành.
+Chỗ này (xưng anh em nha hihi)
+Biết ơn vì giữa dòng đời này, giữa 8 tỷ người mà anh vẫn được gặp và yêu em.
+Biết ơn vì em đã chọn ở lại, dù có những lúc anh chưa đủ tinh tế, chưa đủ trưởng thành.
 
-Anh thích cách em cười, thích cả những lúc em nhăn mặt hờn dỗi.
-Anh nhớ từng tin nhắn đơn giản của em, nhớ những lần mình lặng im mà vẫn thấy lòng bình yên.
+Tuy em khá quế loz, nhưng mà lúc bình thường em không quế loz thì anh thấy em dễ thương lắm luôn, mặt bánh bao má hằm cute, chịu hem có nổi.
+Mỗi lần giận dỗi là nhớ em bé chịu hem có nổi luôn nè
 
 Ngày 8/3 này, anh không chỉ chúc em xinh đẹp và hạnh phúc,
 mà còn mong em luôn được là chính em – cô gái vừa mạnh mẽ, vừa nhạy cảm, vừa đáng yêu đến lạ.
