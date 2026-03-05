@@ -118,7 +118,7 @@ function initEventCountdown(onReady) {
         Hãy quay lại vào ngày 8/3 nha bé TRÂN ❤️
       </p>
       <p class="event-countdown-subtext">
-        VỚI LẠI TRANG WEB TUI LÀM CHƯA CÓ XONG ĐÂU NÊN KHÓA KHÔNG CHO XEM TRƯỚC
+        PHIÊN BẢN HOÀN THIỆN
       </p>
     </div>
   `;
